@@ -85,9 +85,9 @@ Studio.destroy_all
 Warner_Bros = Studio.new
 Warner_Bros.name = "Warner Bros."
 Warner_Bros.save
-puts Warner_Bros.inspect
+# puts Warner_Bros.inspect
 
-puts "There are #{Studio.all.count} studios."
+# puts "There are #{Studio.all.count} studios."
 
 # Adding Movies data
 
@@ -99,7 +99,7 @@ Batman_Begins.year_released = 2005
 Batman_Begins.rated = "PG-13"
 Batman_Begins.studio_id = Studio.find_by({"name" => "Warner Bros."}).id
 Batman_Begins.save
-puts Batman_Begins.inspect
+# puts Batman_Begins.inspect
 
 Dark_Knight = Movie.new
 Dark_Knight.title = "The Dark Knight"
@@ -107,7 +107,7 @@ Dark_Knight.year_released = 2008
 Dark_Knight.rated = "PG-13"
 Dark_Knight.studio_id = Studio.find_by({"name" => "Warner Bros."}).id
 Dark_Knight.save
-puts Dark_Knight.inspect
+# puts Dark_Knight.inspect
 
 Knight_Rises = Movie.new
 Knight_Rises.title = "The Dark Knight Rises"
@@ -115,9 +115,9 @@ Knight_Rises.year_released = 2012
 Knight_Rises.rated = "PG-13"
 Knight_Rises.studio_id = Studio.find_by({"name" => "Warner Bros."}).id
 Knight_Rises.save
-puts Knight_Rises.inspect
+# puts Knight_Rises.inspect
 
-puts "There are #{Movie.all.count} movies."
+# puts "There are #{Movie.all.count} movies."
 
 # Adding Actors data
 
@@ -126,7 +126,7 @@ Actor.destroy_all
 Christian_Bale = Actor.new
 Christian_Bale.name = "Christian Bale"
 Christian_Bale.save
-puts Christian_Bale.inspect
+# puts Christian_Bale.inspect
 
 Michael = Actor.new
 Michael.name = "Michael Caine"
@@ -168,7 +168,7 @@ Anne = Actor.new
 Anne.name = "Anne Hathaway"
 Anne.save
 
-puts "There are #{Actor.all.count} actors."
+# puts "There are #{Actor.all.count} actors."
 
 # Adding Roles data
 
@@ -180,7 +180,7 @@ role1.movie_id = Movie.find_by({"title" => "Batman Begins"}).id
 role1.actor_id = Actor.find_by({"name" => "Christian Bale"}).id
 role1.character_name = "Bruce Wayne"
 role1.save
-puts role1.inspect
+# puts role1.inspect
 
 role2 = Role.new
 role2.movie_id = Movie.find_by({"title" => "Batman Begins"}).id
@@ -213,7 +213,7 @@ role6.movie_id = Movie.find_by({"title" => "The Dark Knight"}).id
 role6.actor_id = Actor.find_by({"name" => "Christian Bale"}).id
 role6.character_name = "Bruce Wayne"
 role6.save
-puts role6.inspect
+# puts role6.inspect
 
 role7 = Role.new
 role7.movie_id = Movie.find_by({"title" => "The Dark Knight"}).id
@@ -245,7 +245,7 @@ role11.movie_id = Movie.find_by({"title" => "The Dark Knight Rises"}).id
 role11.actor_id = Actor.find_by({"name" => "Christian Bale"}).id
 role11.character_name = "Bruce Wayne"
 role11.save
-puts role11.inspect
+# puts role11.inspect
 
 role12 = Role.new
 role12.movie_id = Movie.find_by({"title" => "The Dark Knight Rises"}).id
@@ -271,11 +271,7 @@ role15.actor_id = Actor.find_by({"name" => "Anne Hathaway"}).id
 role15.character_name = "Selina Kyle"
 role15.save
 
-
-puts "There are #{Role.all.count} roles."
-
-
-
+# puts "There are #{Role.all.count} roles."
 
 # Prints a header for the movies output
 puts "Movies"
@@ -285,6 +281,22 @@ puts ""
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
 
+all_movies = Movie.all
+all_studios = Studio.all
+all_roles = Role.all
+all_actors = Actor.all
+
+for movie_temp in all_movies
+    studio_temp = all_studios.find_by("id" => movie_temp["studio_id"])
+    title = movie_temp["title"]
+    year_released = movie_temp["year_released"]
+    rating = movie_temp["rated"]
+    studio_name = studio_temp["name"]
+puts "#{title} #{year_released} #{rating} #{studio_name}"
+end
+
+    
+
 # Prints a header for the cast output
 puts ""
 puts "Top Cast"
@@ -293,3 +305,13 @@ puts ""
 
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
+
+for role_temp in all_roles
+    moviename_temp = all_movies.find_by("id" => role_temp["movie_id"])
+    actorname_temp = all_actors.find_by("id" => role_temp["actor_id"])
+    movie_name = moviename_temp["title"]
+    actor_name = actorname_temp["name"]
+    character_name = role_temp["character_name"]
+
+puts "#{movie_name} #{actor_name} #{character_name} "
+end
