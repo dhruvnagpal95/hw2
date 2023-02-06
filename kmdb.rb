@@ -78,6 +78,101 @@
 # Do not use hard-coded foreign key IDs.
 # TODO!
 
+Studio.destroy_all
+
+Warner_Bros = Studio.new
+Warner_Bros.name = "Warner Bros."
+Warner_Bros.save
+puts Warner_Bros.inspect
+
+puts "There are #{Studio.all.count} studios."
+
+Movie.destroy_all
+
+Batman_Begins = Movie.new
+Batman_Begins.title = "Batman Begins"
+Batman_Begins.year_released = 2005
+Batman_Begins.rated = "PG-13"
+Batman_Begins.studio_id = Studio.find_by({"name" => "Warner Bros."}).id
+Batman_Begins.save
+puts Batman_Begins.inspect
+
+Dark_Knight = Movie.new
+Dark_Knight.title = "The Dark Knight"
+Dark_Knight.year_released = 2008
+Dark_Knight.rated = "PG-13"
+Dark_Knight.studio_id = Studio.find_by({"name" => "Warner Bros."}).id
+Dark_Knight.save
+puts Dark_Knight.inspect
+
+Knight_Rises = Movie.new
+Knight_Rises.title = "The Dark Knight Rises"
+Knight_Rises.year_released = 2012
+Knight_Rises.rated = "PG-13"
+Knight_Rises.studio_id = Studio.find_by({"name" => "Warner Bros."}).id
+Knight_Rises.save
+puts Knight_Rises.inspect
+
+puts "There are #{Movie.all.count} movies."
+
+Actor.destroy_all
+
+Christian_Bale = Actor.new
+Christian_Bale.name = "Christian Bale."
+Christian_Bale.save
+
+Michael = Actor.new
+Michael.name = "Michael Cain."
+Michael.save
+
+Liam = Actor.new
+Liam.name = "Liam Neeson."
+Liam.save
+
+Katie = Actor.new
+Katie.name = "Katie Holmes."
+Katie.save
+
+Gary = Actor.new
+Gary.name = "Gary Oldman."
+Gary.save
+
+Heath = Actor.new
+Heath.name = "Heath Ledger."
+Heath.save
+
+Aaron = Actor.new
+Aaron.name = "Aaron Eckhart."
+Aaron.save
+
+Maggie = Actor.new
+Maggie.name = "Maggie Gyllenhaal."
+Maggie.save
+
+Tom = Actor.new
+Tom.name = "Tom Hardy."
+Tom.save
+
+Joseph = Actor.new
+Joseph.name = "Joseph Gordon-Levitt."
+Joseph.save
+
+Anne = Actor.new
+Anne.name = "Anne Hathaway."
+Anne.save
+
+puts "There are #{Actor.all.count} actors."
+
+Role.destroy_all
+
+role1 = Role.new
+role1.movie_id = 
+
+puts "There are #{Role.all.count} roles."
+
+
+
+
 # Prints a header for the movies output
 puts "Movies"
 puts "======"
